@@ -1,9 +1,8 @@
-package service;
+package application.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import entities.Programmer;
+import application.entities.Programmer;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -15,12 +14,10 @@ import java.util.List;
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class ProgramerJsonConverter {
+public class ProgrammerJsonConverter {
     private ObjectMapper objectMapper = new ObjectMapper();
-//    private ObjectWriter objectWriter = objectMapper.writer();
 
-
-    public String toJsonProgrammer (Programmer programmer){
+    public String toJsonProgrammer(Programmer programmer) {
         try {
             return objectMapper.writeValueAsString(programmer);
         } catch (JsonProcessingException e) {
@@ -29,7 +26,7 @@ public class ProgramerJsonConverter {
         return null;
     }
 
-    public String toJsonProgramersList (List<Programmer> programmers){
+    public String toJsonProgramersList(List<Programmer> programmers) {
         try {
             return objectMapper.writeValueAsString(programmers);
         } catch (JsonProcessingException e) {

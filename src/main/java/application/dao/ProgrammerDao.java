@@ -1,6 +1,6 @@
-package dao;
+package application.dao;
 
-import entities.Programmer;
+import application.entities.Programmer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;

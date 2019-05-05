@@ -1,21 +1,17 @@
-package configuration;
+package application.configuration;
 
-
-import entities.Programmer;
-import entities.ProgrammerTask;
-import entities.Task;
+import application.entities.Programmer;
+import application.entities.ProgrammerTask;
+import application.entities.Task;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
-import utils.HibernateUtil;
 
 @Configuration
-@ComponentScan("dao")
-@ComponentScan ("service")
+@ComponentScan("application")
 public class SpringHibernateSessionConfig {
     @Bean
     public SessionFactory configuration() {
