@@ -15,7 +15,7 @@ public class Starter {
         ProgrammerDao programmerDao = context.getBean(ProgrammerDao.class);
         programmerDao.getAll().forEach(System.out::println);
         ProgrammerService programmerService = context.getBean(ProgrammerService.class);
-        programmerService.getAllProgrammers().get().forEach(System.out::println);
+        programmerService.getAllProgrammers().forEach(System.out::println);
 //        System.out.println(programmerDao.get(7L));
 //        Programmer id7Programmer = programmerDao.get(7L);
 //        id7Programmer.setName("Mikle");

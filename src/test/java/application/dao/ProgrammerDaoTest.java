@@ -23,7 +23,7 @@ public class ProgrammerDaoTest {
 
     @Before
     public void setUp() {
-        local = new Programmer("TestName", "TestSurname", 1);
+        local = new Programmer("TestName", "TestSurname");
         programmerDao.save(local);
         size = programmerDao.getAll().size();
     }

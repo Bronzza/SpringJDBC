@@ -25,22 +25,12 @@ import javax.persistence.Transient;
 @Setter
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-@RequiredArgsConstructor
 @AllArgsConstructor
-@Component
-@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@NoArgsConstructor
 public class Programmer extends Person {
     @Column(name = "name")
     private String name;
 
     @Column(name = "surname")
     private String surName;
-
-    @Transient
-    @InjectRandomInt(min = 0, max = 10)
-    private int luckLevel;
-
-    @PostConstruct
-    private void init() {
-    }
 }
