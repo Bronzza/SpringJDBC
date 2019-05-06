@@ -15,8 +15,7 @@ import java.sql.SQLException;
 @Getter
 @Setter
 public class ProgrammerMapper implements RowMapper {
-    @Autowired
-    ApplicationContext context;
+
     public Programmer mapRow(ResultSet resultSet, int i) throws SQLException {
         Programmer programmer = new Programmer();
         programmer.setId(resultSet.getLong("id"));

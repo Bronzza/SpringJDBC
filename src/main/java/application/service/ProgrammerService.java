@@ -2,15 +2,20 @@ package application.service;
 
 import application.dao.ProgrammerDao;
 import application.entities.Programmer;
-import application.entities.ProgrammerForInside;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@Component
+@Getter
+@Setter
 public class ProgrammerService {
     @Autowired
     private ProgrammerDao programmerDao;
@@ -23,27 +28,13 @@ public class ProgrammerService {
         programmerDao.delete(programmer.getSurName());
     }
 
-    public ProgrammerForInside getProgrammer(String surName) {
-        Programmer programmer = programmerDao.get(surName);
-        ProgrammerForInside result = new ProgrammerForInside();
-        resertFieldsFromProgramer(programmer, result);
-        return result;
+    public Programmer getProgrammer(String surName) {
+        return programmerDao.get(surName);
     }
 
-    private void resertFieldsFromProgramer(Programmer programmer, ProgrammerForInside programmerForInside) {
-        programmerForInside.setName(programmer.getName());
-        programmerForInside.setSurName(programmer.getSurName());
-        programmerForInside.setId(programmer.getId());
-    }
 
-    public List<ProgrammerForInside> getAllProgrammers() {
-        List<ProgrammerForInside> result = new ArrayList<>();
-        programmerDao.getAll().forEach(a -> {
-            ProgrammerForInside programmerForInside = new ProgrammerForInside();
-            resertFieldsFromProgramer(a, programmerForInside);
-            result.add(programmerForInside);
-        });
-        return  result;
+    public List<Programmer> getAllProgrammers() {
+        return programmerDao.getAll();
     }
 
     public void updateProgrammer(Programmer programmer) {

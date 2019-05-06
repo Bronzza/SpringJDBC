@@ -23,7 +23,7 @@ public class ProgrammerDaoTest {
 
     @Before
     public void setUp() {
-        local = new Programmer("TestName", "TestSurname");
+        local = new Programmer("TestName", "TestSurname",1);
         programmerDao.save(local);
         size = programmerDao.getAll().size();
     }
@@ -41,7 +41,7 @@ public class ProgrammerDaoTest {
 
     @Test
     public void get() {
-        Programmer programmers = programmerDao.get("Test");
+        Programmer programmers = programmerDao.get("TestSurname");
         assertNotNull(programmers);
     }
 
@@ -59,13 +59,13 @@ public class ProgrammerDaoTest {
 
     @Test
     public void update() {
-        Programmer programmer = programmerDao.get("Test");
+        Programmer programmer = programmerDao.get("TestSurname");
         String previousName = programmer.getName();
         programmer.setName("Temp");
         programmerDao.update(programmer);
-        assertEquals(programmer, programmerDao.get("Test"));
+        assertEquals(programmer, programmerDao.get("TestSurname"));
         programmer.setName(previousName);
         programmerDao.update(programmer);
-        assertEquals(programmer, programmerDao.get("Test"));
+        assertEquals(programmer, programmerDao.get("TestSurname"));
     }
 }

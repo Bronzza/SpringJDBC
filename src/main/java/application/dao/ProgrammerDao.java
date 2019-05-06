@@ -3,10 +3,12 @@ package application.dao;
 import application.entities.Programmer;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Log4j
@@ -20,6 +22,8 @@ public class ProgrammerDao implements DaoProgramer {
     private final static String UPDATE_PROGRAMMER = "UPDATE PROGRAMMERS SET name = ?, surname = ? WHERE id = ?";
 
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private ApplicationContext context;
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
@@ -31,14 +35,21 @@ public class ProgrammerDao implements DaoProgramer {
     }
 
     public List<Programmer> getAll() {
-        return jdbcTemplate.query(GET_ALL_PROGRAMMER, new ProgrammerMapper());
+        List<Programmer> result = new ArrayList<>();
+        jdbcTemplate.query(GET_ALL_PROGRAMMER, new ProgrammerMapper()).forEach(a -> {
+            Programmer bean = context.getBean(Programmer.class);
+            resertFieldsFromProgramer((Programmer) a, bean);
+            result.add(bean);
+        });
+        return result;
     }
 
     public Programmer get(String surname) {
-        Programmer result = (Programmer) jdbcTemplate.queryForObject(GET_PROGRAMMER_BY_SURNAME, new Object[]{surname},
+        Programmer fromDB = (Programmer) jdbcTemplate.queryForObject(GET_PROGRAMMER_BY_SURNAME, new Object[]{surname},
                 new ProgrammerMapper());
+        Programmer result = context.getBean(Programmer.class);
+        resertFieldsFromProgramer(fromDB, result);
         return result;
-
     }
 
     public void delete(String surname) {
@@ -52,5 +63,11 @@ public class ProgrammerDao implements DaoProgramer {
 
     public void update(Programmer programmer) {
         jdbcTemplate.update(UPDATE_PROGRAMMER, programmer.getName(), programmer.getSurName(), programmer.getId());
+    }
+
+    private void resertFieldsFromProgramer(Programmer programmerFrom, Programmer programmerTo) {
+        programmerTo.setName(programmerFrom.getName());
+        programmerTo.setSurName(programmerFrom.getSurName());
+        programmerTo.setId(programmerFrom.getId());
     }
 }

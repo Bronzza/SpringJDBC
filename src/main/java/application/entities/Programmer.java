@@ -24,13 +24,19 @@ import javax.persistence.Transient;
 @Getter
 @Setter
 @ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = false, exclude = {"luckLevel"})
 @AllArgsConstructor
 @NoArgsConstructor
+@Component
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Programmer extends Person {
     @Column(name = "name")
     private String name;
 
     @Column(name = "surname")
     private String surName;
+
+    @Transient
+    @InjectRandomInt(min = 1, max = 10)
+    private int luckLevel;
 }
