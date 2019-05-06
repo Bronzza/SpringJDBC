@@ -78,11 +78,17 @@ public class ProgrammerDao implements Dao<Programmer> {
                 });
     }
 
+    @Override
     public void save(Programmer programmer) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.save(programmer);
             session.getTransaction().commit();
         }
+    }
+
+    public void deleteAll(){
+        List <Programmer> all = getAll();
+        all.forEach(a->delete(a.getSurName()));
     }
 }

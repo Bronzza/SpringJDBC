@@ -8,16 +8,18 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.util.Random;
 
-
+@Component
 @Log4j
-public class InjectRandomIntBeanPostProcess implements BeanFactoryPostProcessor, BeanPostProcessor {
+public class InjectRandomIntBeanPostProcess implements BeanPostProcessor {
+    @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        Field[] fields = bean.getClass().getFields();
+        Field[] fields = bean.getClass().getDeclaredFields();
         for (Field field : fields) {
             InjectRandomInt annotation = field.getAnnotation(InjectRandomInt.class);
             if (annotation != null) {
@@ -39,15 +41,4 @@ public class InjectRandomIntBeanPostProcess implements BeanFactoryPostProcessor,
         }
         return bean;
     }
-
-    @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
-//        configurableListableBeanFactory.addBeanPostProcessor(this);
-        String[] beanDefinitionNames = configurableListableBeanFactory.getBeanDefinitionNames();
-        for (String name : beanDefinitionNames) {
-            BeanDefinition beanDefinition = configurableListableBeanFactory.getBeanDefinition(name);
-
-        }
-    }
-
 }

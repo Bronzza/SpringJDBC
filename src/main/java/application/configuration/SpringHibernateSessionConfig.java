@@ -20,7 +20,8 @@ public class SpringHibernateSessionConfig {
         configuration.addAnnotatedClass(ProgrammerTask.class);
         configuration.addAnnotatedClass(Task.class);
         configuration.configure("hibernate.cfg.xml");
-        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                .applySettings(configuration.getProperties()).build();
         return configuration.buildSessionFactory(serviceRegistry);
     }
 }
