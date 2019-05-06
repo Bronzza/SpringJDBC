@@ -11,15 +11,16 @@ import java.util.List;
 
 @Log4j
 @Repository
-public class ProgrammerDao implements DaoProgramer{
+public class ProgrammerDao implements DaoProgramer {
 
     private final static String GET_ALL_PROGRAMMER = "SELECT * FROM PROGRAMMERS";
     private final static String GET_PROGRAMMER_BY_SURNAME = "SELECT * FROM PROGRAMMERS WHERE surname = ?";
     private final static String DELETE_PROGRAMMER_BY_SURNAME = "DELETE FROM PROGRAMMERS WHERE SURNAME = ?";
     private final static String SAVE_PROGRAMMER = "INSERT INTO PROGRAMMERS (name, surname) VALUES (?,?)";
-    private final static String UPDATE_PROGRAMMER =  "UPDATE PROGRAMMERS SET name = ?, surname = ? WHERE id = ?";
+    private final static String UPDATE_PROGRAMMER = "UPDATE PROGRAMMERS SET name = ?, surname = ? WHERE id = ?";
 
     private JdbcTemplate jdbcTemplate;
+
     @Autowired
     public void setDataSource(DataSource dataSource) {
 
@@ -34,11 +35,11 @@ public class ProgrammerDao implements DaoProgramer{
     }
 
     public Programmer get(String surname) {
-        Programmer result = (Programmer)jdbcTemplate.queryForObject(GET_PROGRAMMER_BY_SURNAME, new Object[]{surname},
+        Programmer result = (Programmer) jdbcTemplate.queryForObject(GET_PROGRAMMER_BY_SURNAME, new Object[]{surname},
                 new ProgrammerMapper());
         return result;
 
-}
+    }
 
     public void delete(String surname) {
         jdbcTemplate.update(DELETE_PROGRAMMER_BY_SURNAME, surname);

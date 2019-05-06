@@ -23,7 +23,7 @@ import javax.persistence.Transient;
 @Entity
 @Getter
 @Setter
-@ToString (callSuper = true)
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -37,7 +37,7 @@ public class Programmer extends Person {
     private String surName;
 
     @Transient
-    @InjectRandomInt(min = 0, max = 10  )
+    @InjectRandomInt(min = 0, max = 10)
     private int luckLevel;
 
     @PostConstruct
