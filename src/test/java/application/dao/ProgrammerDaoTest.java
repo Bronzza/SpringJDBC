@@ -41,7 +41,7 @@ public class ProgrammerDaoTest {
 
     @Test
     public void get() {
-        Programmer programmers = programmerDao.get(9L);
+        Programmer programmers = programmerDao.get("Test");
         assertNotNull(programmers);
     }
 
@@ -59,13 +59,13 @@ public class ProgrammerDaoTest {
 
     @Test
     public void update() {
-        Programmer programmer = programmerDao.get(9L);
+        Programmer programmer = programmerDao.get("Test");
         String previousName = programmer.getName();
         programmer.setName("Temp");
         programmerDao.update(programmer);
-        assertEquals(programmer, programmerDao.get(9L));
+        assertEquals(programmer, programmerDao.get("Test"));
         programmer.setName(previousName);
         programmerDao.update(programmer);
-        assertEquals(programmer, programmerDao.get(9L));
+        assertEquals(programmer, programmerDao.get("Test"));
     }
 }

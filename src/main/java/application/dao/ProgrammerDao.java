@@ -1,22 +1,20 @@
 package application.dao;
 
 import application.entities.Programmer;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.List;
 
 @Log4j
-@Component
-@RequiredArgsConstructor
+@Repository
 public class ProgrammerDao implements DaoProgramer{
 
     private final static String GET_ALL_PROGRAMMER = "SELECT * FROM PROGRAMMERS";
-    private final static String GET_PROGRAMMER_BY_ID = "SELECT * FROM PROGRAMMERS WHERE ID = ?";
+    private final static String GET_PROGRAMMER_BY_SURNAME = "SELECT * FROM PROGRAMMERS WHERE surname = ?";
     private final static String DELETE_PROGRAMMER_BY_SURNAME = "DELETE FROM PROGRAMMERS WHERE SURNAME = ?";
     private final static String SAVE_PROGRAMMER = "INSERT INTO PROGRAMMERS (name, surname) VALUES (?,?)";
     private final static String UPDATE_PROGRAMMER =  "UPDATE PROGRAMMERS SET name = ?, surname = ? WHERE id = ?";
@@ -35,8 +33,8 @@ public class ProgrammerDao implements DaoProgramer{
         return jdbcTemplate.query(GET_ALL_PROGRAMMER, new ProgrammerMapper());
     }
 
-    public Programmer get(Long id) {
-        Programmer result = (Programmer)jdbcTemplate.queryForObject(GET_PROGRAMMER_BY_ID, new Object[]{id},
+    public Programmer get(String surname) {
+        Programmer result = (Programmer)jdbcTemplate.queryForObject(GET_PROGRAMMER_BY_SURNAME, new Object[]{surname},
                 new ProgrammerMapper());
         return result;
 

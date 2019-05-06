@@ -11,7 +11,7 @@ interface DaoProgramer {
 
     public abstract List<Programmer> getAll();
 
-    public abstract Programmer get(Long id);
+    public abstract Programmer get(String name);
 
     public abstract void delete(String surname);
 

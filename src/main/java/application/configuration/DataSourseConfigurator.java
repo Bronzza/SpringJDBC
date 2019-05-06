@@ -1,6 +1,7 @@
 package application.configuration;
 
 
+import application.entities.Programmer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,7 +13,6 @@ import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan("application")
-@ComponentScan("application.entities")
 @PropertySource({"classpath:dbConfig.properties"})
 public class DataSourseConfigurator {
 

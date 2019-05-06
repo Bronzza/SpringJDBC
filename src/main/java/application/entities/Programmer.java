@@ -25,10 +25,10 @@ import javax.persistence.Transient;
 @Setter
 @ToString (callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Component
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Programmer extends Person {
     @Column(name = "name")
     private String name;
