@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan("application")
+@ComponentScan("application.entities")
 @PropertySource({"classpath:dbConfig.properties"})
 public class DataSourseConfigurator {
 
