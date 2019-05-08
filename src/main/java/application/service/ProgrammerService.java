@@ -16,7 +16,7 @@ import java.util.Optional;
 @Getter
 @Setter
 public class ProgrammerService {
-    @Autowired
+
     private ProgrammerDaoImpl programmerDao;
 
     public void addToDB(Programmer programmer) {

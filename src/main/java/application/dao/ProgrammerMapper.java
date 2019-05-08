@@ -4,8 +4,6 @@ import application.entities.Programmer;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
