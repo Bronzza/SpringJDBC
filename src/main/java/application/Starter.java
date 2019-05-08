@@ -1,9 +1,7 @@
 package application;
 
 import application.configuration.DataSourseConfigurator;
-import application.dao.ProgrammerDao;
-import application.entities.Programmer;
-import application.service.ProgrammerService;
+import application.dao.ProgrammerDaoImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -12,7 +10,7 @@ public class Starter {
         ApplicationContext context =
                 new AnnotationConfigApplicationContext(DataSourseConfigurator.class);
 
-        ProgrammerDao programmerDao = context.getBean(ProgrammerDao.class);
+        ProgrammerDaoImpl programmerDao = context.getBean(ProgrammerDaoImpl.class);
         programmerDao.getAll().forEach(System.out::println);
 
     }

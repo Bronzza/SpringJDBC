@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Log4j
 @Repository
-public class ProgrammerDao implements DaoProgramer {
+public class ProgrammerDaoImpl implements DaoProgramer {
 
     private final static String GET_ALL_PROGRAMMER = "SELECT * FROM PROGRAMMERS";
     private final static String GET_PROGRAMMER_BY_SURNAME = "SELECT * FROM PROGRAMMERS WHERE surname = ?";

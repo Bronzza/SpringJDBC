@@ -10,14 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = DataSourseConfigurator.class)
 public class ProgrammerDaoTest {
 
     @Autowired
-    private ProgrammerDao programmerDao;
+    private ProgrammerDaoImpl programmerDao;
     private Programmer local;
     private int size;
 
@@ -41,7 +43,7 @@ public class ProgrammerDaoTest {
 
     @Test
     public void get() {
-        Programmer programmers = programmerDao.get("TestSurname");
+        Programmer programmers = programmerDao.get("TestSurname").get();
         assertNotNull(programmers);
     }
 
@@ -59,7 +61,7 @@ public class ProgrammerDaoTest {
 
     @Test
     public void update() {
-        Programmer programmer = programmerDao.get("TestSurname");
+        Programmer programmer = programmerDao.get("TestSurname").get();
         String previousName = programmer.getName();
         programmer.setName("Temp");
         programmerDao.update(programmer);

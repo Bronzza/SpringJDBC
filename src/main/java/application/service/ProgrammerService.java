@@ -1,16 +1,15 @@
 package application.service;
 
-import application.dao.ProgrammerDao;
+import application.dao.ProgrammerDaoImpl;
 import application.entities.Programmer;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Component
@@ -18,7 +17,7 @@ import java.util.List;
 @Setter
 public class ProgrammerService {
     @Autowired
-    private ProgrammerDao programmerDao;
+    private ProgrammerDaoImpl programmerDao;
 
     public void addToDB(Programmer programmer) {
         programmerDao.save(programmer);
@@ -28,7 +27,7 @@ public class ProgrammerService {
         programmerDao.delete(programmer.getSurName());
     }
 
-    public Programmer getProgrammer(String surName) {
+    public Optional<Programmer> getProgrammer(String surName) {
         return programmerDao.get(surName);
     }
 
