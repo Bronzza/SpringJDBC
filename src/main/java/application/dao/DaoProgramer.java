@@ -4,18 +4,19 @@ import application.entities.Programmer;
 
 import javax.sql.DataSource;
 import java.util.List;
+import java.util.Optional;
 
 interface DaoProgramer {
 
-    public abstract void setdataSource(DataSource dataSource);
+    abstract void setdataSource(DataSource dataSource);
 
-    public abstract List<Programmer> getAll();
+    abstract List<Programmer> getAll();
 
-    public abstract Programmer get(String name);
+    abstract Optional<Programmer> get(String name);
 
-    public abstract void delete(String surname);
+    abstract void delete(String surname);
 
-    public abstract void save(Programmer programmer);
+    abstract void save(Programmer programmer);
 
-    public abstract void update(Programmer programmer);
+    abstract void update(Programmer programmer);
 }

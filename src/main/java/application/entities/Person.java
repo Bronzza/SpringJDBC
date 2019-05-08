@@ -19,7 +19,6 @@ import javax.persistence.MappedSuperclass;
 @AllArgsConstructor
 @MappedSuperclass
 @ToString
-@Component
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

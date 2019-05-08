@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Log4j
 @Repository
@@ -37,19 +38,19 @@ public class ProgrammerDao implements DaoProgramer {
     public List<Programmer> getAll() {
         List<Programmer> result = new ArrayList<>();
         jdbcTemplate.query(GET_ALL_PROGRAMMER, new ProgrammerMapper()).forEach(a -> {
-            Programmer bean = context.getBean(Programmer.class);
+            Programmer bean = new Programmer();
             resertFieldsFromProgramer((Programmer) a, bean);
             result.add(bean);
         });
         return result;
     }
 
-    public Programmer get(String surname) {
+    public Optional<Programmer> get(String surname) {
         Programmer fromDB = (Programmer) jdbcTemplate.queryForObject(GET_PROGRAMMER_BY_SURNAME, new Object[]{surname},
                 new ProgrammerMapper());
-        Programmer result = context.getBean(Programmer.class);
+        Programmer result = new Programmer();
         resertFieldsFromProgramer(fromDB, result);
-        return result;
+        return Optional.of(result);
     }
 
     public void delete(String surname) {

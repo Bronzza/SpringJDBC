@@ -23,12 +23,10 @@ import javax.persistence.Transient;
 @Entity
 @Getter
 @Setter
-@ToString(callSuper = true)
+@ToString(callSuper = true, exclude = {"luckLevel"})
 @EqualsAndHashCode(callSuper = false, exclude = {"luckLevel"})
 @AllArgsConstructor
 @NoArgsConstructor
-@Component
-@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Programmer extends Person {
     @Column(name = "name")
     private String name;
